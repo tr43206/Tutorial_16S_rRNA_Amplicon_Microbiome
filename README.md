@@ -1,5 +1,4 @@
 # Microbiome_Tutorial_16S-rRNA-amplicon
-
 Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
@@ -21,7 +20,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --output-dir mafft-fasttree \
    --p-n-threads 32
    ```
-3) Alpha and beta diversity analysis by generating `core-metrics`.
+2) Alpha and beta diversity analysis by generating `core-metrics`.
    ```bash
    qiime diversity core-metrics-phylogenetic \
    --i-phylogeny mafft-fasttree/rooted-tree.qza \
@@ -30,7 +29,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --m-metadata-file Aim1_metadata.txt \
    --output-dir core-metrics-results-1816
    ```
-5) Visualize (Alpha Div. - `qza files` / Beta Div. - `distance qza files`, export `pcoa files` to folder, and check pc proportion with `emperor qzv` files).
+3) Visualize (Alpha Div. - `qza files` / Beta Div. - `distance qza files`, export `pcoa files` to folder, and check pc proportion with `emperor qzv` files).
    ```bash
    qiime diversity alpha-group-significance \
    --i-alpha-diversity core-metrics-phylogenetic/faith_pd_vector.qza \
@@ -45,15 +44,14 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --o-visualization core-metrics-phylogenetic/unweighted_unifrac_distance_group_significance.qzv \
    --p-pairwise
    ```
-
-7) ASVs classification using `classify-learn`.
+4) ASVs classification using `classify-learn`.
    ```bash
    qiime feature-classifier classify-sklearn \
    --i-classifier gg-13-8-99-515-806-nb-classifier.qza \
    --i-reads merged_rep-seqs.qza \
    --o-classification gg2_taxonomy.qza
    ```
-9) Collapse to genus level (or family, phylum, whatever).
+5) Collapse to genus level (or family, phylum, whatever).
     ```bash
     qiime taxa collapse \
     --i-table merged_table.qza \
@@ -61,13 +59,13 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
     --p-level 6 \
     --o-collapsed-table gg2_genus_table.qza
     ```
-11) Convert raw read frequency to relative frequency.
+6) Convert raw read frequency to relative frequency.
     ```bash
     qiime feature-table relative-frequency \
     --i-table gg2_genus_table.qza \
     --o-relative-frequency-table rel_gg2_genus_table.qza
     ```
-13) Export frequency tables (raw and relative, both) to folder, and convert inner `biom files` to `tsv files`.
+7) Export frequency tables (raw and relative, both) to folder, and convert inner `biom files` to `tsv files`.
     ```bash
     qiime tools export \
     --input-path rel_gg2_genus_table.qza \
@@ -79,8 +77,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
     -o rel_gg2_genus_table.tsv \
     --to-tsv
     ```
-
-15) Visualization
+8) Visualization
 
 
 
@@ -141,6 +138,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
+
 # (Optional) Utilizing NCBI data
 
 1) NCBI data download
@@ -157,7 +155,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    | grep -E '^(ERR|SRR|DRR)' \
    | xargs -n 1 -P 4 fasterq-dump -e 16 -p -t ./tmp -O fastq
    ```
-
 2) Importing with NCBI downloaded data
    ```bash
    qiime tools import \
@@ -196,7 +193,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    ```bash
    chmod +x fastqc
    ```
-
 2) Run fastqc
    ```bash
    cat *R1*.fastq.gz > Run45_forward_R1.fastq.gz
@@ -211,6 +207,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 # (Optional) Rarefaction
+
 1) Rarefaction
    ```bash
    qiime diversity alpha-rarefaction \
@@ -241,8 +238,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --p-metric simpson \
    --o-alpha-diversity simpson_vectors.qza \
    --verbose
-   ```
-   
+   ```  
 2) Beta
    ```bash
    qiime diversity beta-phylogenetic \
@@ -263,6 +259,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 # (Optional) Filtering distance matrices
+
 1) Beta
    ```bash
    qiime diversity filter-distance-matrix \
@@ -281,6 +278,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 # (Optional) Download outdated Greengenes database
+
 1) Download
    ```bash
    wget https://ftp.microbio.me/greengenes_release/gg_13_5/gg_13_5_otus.tar.gz
@@ -288,7 +286,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    ```bash
    tar -xzf gg_13_5_otus.tar.gz
    ```
-   
 2) Import to QIIME 2
    ```bash
    qiime tools import \
@@ -303,7 +300,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --input-format HeaderlessTSVTaxonomyFormat \
    --output-path gg13_5-99-tax.qza
    ```
-
 3) Classifier training after specific target region extraction (e.g., V4 region - 515F/806R)
    ```bash
    qiime feature-classifier extract-reads \
@@ -318,7 +314,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --i-reference-taxonomy gg13_5-99-tax.qza \
    --o-classifier gg13_5-99-515F806R-classifier.qza
    ```
-
 4) Application
    ```bash
    qiime feature-classifier classify-sklearn \
@@ -327,7 +322,10 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --o-classification taxonomy.qza
    ```
 
+
+
 # (Optional) txt to qza
+
 1) txt to qza
    ```bash
    qiime tools import \
@@ -347,8 +345,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    -i otu_for_picrust.biom \
    -o picrust-MPGA/
    ```
-
-3) MICOM
+2) MICOM
    ```bash
    qiime micom build \
    --i-abundance filtered_table_min-freq-1000.qza \
@@ -404,8 +401,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --m-metadata-column Group \
    --o-visualization associations.qzv
    ```
-
-5) metnet
+3) metnet
    ```bash
    qiime metnet generateFeatures \
    --i-frequency filtered_table_min-freq-1000_transposed.qza \
@@ -491,6 +487,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 # (Optional) Nested-cross validation (NCV)-based machine learning on QIIME 2
+
 1) classify samples (NCV)
    ```bash
    qiime sample-classifier classify-samples-ncv \
@@ -503,7 +500,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --output-dir q2-sample-classifier/classify-samples-ncv \
    --p-parameter-tuning
    ```
-
 2) Confution-matrix
    ```bash
    qiime sample-classifier confusion-matrix \
@@ -513,7 +509,6 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
    --m-truth-column <예측하고자 하는 column명> \
    --o-visualization classify-samples-ncv/ncv-confusion-matrix.qzv
    ```
-
 3) Feature importance scores
    ```bash
    qiime metadata tabulate \

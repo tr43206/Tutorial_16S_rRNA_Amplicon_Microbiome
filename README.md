@@ -3,7 +3,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# Step 0 : Preprocessing
+## Step 0 : Preprocessing
 
 1) Demultiplex fastq files by generating `manifest file`. Use `01. manifest_auto.ipynb`.
 2) Low frequency samples `trimming`, `denoising`, `merging` forward and reverse reads, and `chimera removal` using DADA2. Normally, `Q20` or `Q30` is used for quality threshold.
@@ -11,7 +11,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# Step 1 : QIIME 2 (v qiime2-amplicon-2024.10)
+## Step 1 : QIIME 2 (v qiime2-amplicon-2024.10)
 
 1) Generate a tree for phylogenetic diversity analyses (e.g., `Faith PD`, `UniFrac`).
    ```bash
@@ -81,7 +81,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) Feature table filtering and combining
+## (Optional) Feature table filtering and combining
 
 1) Check file format
    ```bash
@@ -139,7 +139,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) Utilizing NCBI data
+## (Optional) Utilizing NCBI data
 
 1) NCBI data download
    ```bash
@@ -166,7 +166,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) fastqc
+## (Optional) fastqc
 
 1) fastqc install
    ```bash
@@ -221,7 +221,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) Alpha and beta diversity analysis (not in core-metrics)
+## (Optional) Alpha and beta diversity analysis (not in core-metrics)
 
 1) Alpha
    ```bash
@@ -258,7 +258,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) Filtering distance matrices
+## (Optional) Filtering distance matrices
 
 1) Beta
    ```bash
@@ -277,7 +277,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) Download outdated Greengenes database
+## (Optional) Download outdated Greengenes database
 
 1) Download
    ```bash
@@ -324,7 +324,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# (Optional) txt to qza
+## (Optional) txt to qza
 
 1) txt to qza
    ```bash
@@ -336,7 +336,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# Step 2 : Pathways prediction
+## Step 2 : Pathways prediction
 
 1) PICRUSt2
    ```bash
@@ -479,14 +479,14 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 
 
-# Step 3 : Key features identification
+## Step 3 : Key features identification
 
 1) More strict abundance and prevalence filtering (to minimize overfitting in machine learning-based models caused by rare taxa)
 2) Machine learning-based models (e.g., Random forest, Support vector machine (SVM)), or Linear regression-based key features identification.
 
 
 
-# (Optional) Nested-cross validation (NCV)-based machine learning on QIIME 2
+## (Optional) Nested-cross validation (NCV)-based machine learning on QIIME 2
 
 1) classify samples (NCV)
    ```bash

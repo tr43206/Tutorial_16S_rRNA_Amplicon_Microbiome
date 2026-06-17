@@ -1,0 +1,27 @@
+# Raw input data
+Input/
+*.tar
+*.tar.gz
+*.gz
+*.zip
+
+# Sequencing / omics large files
+*.fastq
+*.fq
+*.bam
+*.bai
+*.sam
+*.h5
+*.h5ad
+
+# R large objects
+*.RData
+*.rda
+*.rds
+
+# RStudio / OS / editor
+.Rhistory
+.Rapp.history
+.Rproj.user/
+.DS_Store
+Thumbs.db

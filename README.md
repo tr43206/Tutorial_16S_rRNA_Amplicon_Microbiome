@@ -481,7 +481,7 @@ Output fastq files of Gut-Lung Axis project from MGI DNBSEQ-G99.
 
 ## Step 3 : Key features identification
 
-1) More strict abundance and prevalence filtering (to minimize overfitting in machine learning-based models caused by rare taxa)
+1) Stricter abundance and prevalence filtering (to minimize overfitting in machine learning-based models caused by rare taxa)
 2) Machine learning-based models (e.g., Random forest, Support vector machine (SVM)), or Linear regression-based key features identification.
 
 

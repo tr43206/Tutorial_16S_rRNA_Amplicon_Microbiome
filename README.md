@@ -1,4 +1,4 @@
-# Microbiome_Tutorial_16S-rRNA-amplicon
+# Tutorial_16S_rRNA_Amplicon_Microbiome
 Output fastq files of Gut-Lung Axis project from Illumina MiSeq.
 
 
